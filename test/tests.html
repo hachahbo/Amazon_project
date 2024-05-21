@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Example</title>
+</head>
+<body>
+    <div>
+        <h1>Counter: <span id="counter">0</span></h1>
+        <button id="increment">Increment</button>
+        <button id="decrement">Decrement</button>
+    </div>
+
+</body>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+    const counterElement = document.getElementById('counter');
+    const incrementButton = document.getElementById('increment');
+    const decrementButton = document.getElementById('decrement');
+
+    // Retrieve the counter value from localStorage
+    let counter = localStorage.getItem('counter');
+    if (counter === null) {
+        counter = 0; // Default value if nothing is 
+    } else {
+        counter = parseInt(counter, 10);
+    }
+
+    counterElement.textContent = counter;
+
+    function updateCounter(newCounter) {
+        counter = newCounter;
+        counterElement.textContent = counter;
+        localStorage.setItem('counter', counter);
+    }
+
+    incrementButton.addEventListener('click', () => {
+        updateCounter(counter + 1);
+    });
+
+    decrementButton.addEventListener('click', () => {
+        if (counter > 0) {
+            updateCounter(counter - 1);
+        }
+    });
+});
+    </script>
+</html>
